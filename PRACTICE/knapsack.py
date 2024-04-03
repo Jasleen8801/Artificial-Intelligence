@@ -53,6 +53,25 @@ class BFS:
           self.open.append(move)
     return None
 
+class AStar:
+  def __init__(self, knapsack):
+    self.knapsack = knapsack
+    self.open = []
+    self.closed = []
+
+  def search(self):
+    self.open.append((0+self.knapsack.heuristic([]), []))
+    while self.open:
+      items = self.open.pop(0)[1]
+      if self.knapsack.is_goal(items):
+        return items
+      elif items not in self.closed:
+        self.closed.append(items)
+        for move in self.knapsack.get_next_moves(items):
+          self.open.append((self.knapsack.get_value(move) + self.knapsack.heuristic(move), move))
+        self.open.sort(key=lambda x: x[0])  
+    return None
+  
 class DFS:
   def __init__(self, knapsack):
     self.knapsack = knapsack
@@ -77,8 +96,11 @@ def main():
   knapsack = Knapsack(items, cap)
   # bfs = BFS(knapsack)
   # items = bfs.search()
-  dfs = DFS(knapsack)
-  items = dfs.search()
+  # dfs = DFS(knapsack)
+  # items = dfs.search()
+
+  astar = AStar(knapsack)
+  items = astar.search()
   print(items)
   print(knapsack.get_value(items))
 
