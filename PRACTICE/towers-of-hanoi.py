@@ -1,42 +1,80 @@
-class TowersOfHanoi:
-  def __init__(self, towers):
-    self.towers = towers
+from collections import deque
 
-  def getPossMoves(self):
+class Hanoi:
+  def __init__(self, n):
+    self.n = n
+    self.towers = [[], [], []]
+    self.towers[0] = list(range(n, 0, -1))
+
+  def move_disk(self, src, dest):
+    if not self.towers[src]: # no disc
+      return False
+    if self.towers[dest] and self.towers[dest][-1] < self.towers[src][-1]: # smaller disc
+      return False
+    self.towers[dest].append(self.towers[src].pop()) # move disc
+    return True
+  
+  def get_next_moves(self):
     moves = []
-    for i in range(3):
-      for j in range(3):
-        if i!=j:
-          if self.canMove(i, j):
-            new_towers = self.move(i,j)
-            moves.append(TowersOfHanoi(new_towers))
-
+    for src in range(3):
+      for dest in range(3):
+        if src != dest and self.move_disk(src, dest):
+          moves.append((src, dest))
+          self.move_disk(dest, src)
     return moves
-  
-  def canMove(self, fromTower, toTower):
-    if len(self.towers[fromTower]) == 0: return False
-    if len(self.towers[toTower]) == 0: return True
-    return self.towers[fromTower][-1] < self.towers[toTower][-1]
-  
-  def move(self, fromTower, toTower):
-    new_towers = [list(tower) for tower in self.towers]
-    disk = new_towers[fromTower].pop()
-    new_towers[toTower].append(disk)
-    return new_towers
-  
-  def isGoal(self, goal):
-    return self.towers[goal] == list(range(len(self.towers[goal]), 0, -1))
-  
-  def __str__(self) -> str:
-    return str(self.towers)
 
+  def is_goal(self):
+    return not self.towers[0] and not self.towers[1] 
+  
+class BFS:
+  def __init__(self, hanoi) -> None:
+    self.hanoi = hanoi
+    self.closed = []
+    self.open = deque()
+
+  def search(self):
+    self.open.append((self.hanoi, []))
+    while self.open:
+      hanoi, path = self.open.popleft()
+      if hanoi.is_goal():
+        return path
+      elif hanoi.towers not in self.closed:
+        self.closed.append(hanoi.towers)
+        for move in hanoi.get_next_moves():
+          new_hanoi = Hanoi(hanoi.n)
+          new_hanoi.towers = [list(tower) for tower in hanoi.towers]
+          new_hanoi.move_disk(move[0], move[1])
+          self.open.append((new_hanoi, path+[move]))
+    return None
+  
+class DFS:
+  def __init__(self, hanoi):
+    self.hanoi = hanoi
+    self.closed = []
+    self.open = []
+
+  def search(self):
+    self.open.append((self.hanoi, []))
+    while self.open:
+      hanoi, path = self.open.pop()
+      if hanoi.is_goal():
+        return path
+      elif hanoi.towers not in self.closed:
+        self.closed.append(hanoi.towers)
+        for move in hanoi.get_next_moves():
+          new_hanoi = Hanoi(hanoi.n)
+          new_hanoi.towers = [list(tower) for tower in hanoi.towers]
+          new_hanoi.move_disk(move[0], move[1])
+          self.open.append((new_hanoi, path+[move]))
+    return None
+  
 def main():
-  initialState = TowersOfHanoi([[3,2,1],[],[]])
-  goal = TowersOfHanoi([[],[],[3,2,1]])
-  print(initialState)
-  print(goal)
-  print(initialState.isGoal(2))
-  print(initialState.getPossMoves())
+  hanoi = Hanoi(3)
+  # bfs = BFS(hanoi)
+  # path = bfs.search()
+  dfs = DFS(hanoi)
+  path = dfs.search()
+  print(path)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   main()

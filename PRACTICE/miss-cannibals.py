@@ -1,4 +1,5 @@
 # Missionaries and Cannibals Problem
+from collections import deque
 
 class State:
   def __init__(self, mleft, cleft, mright, cright, boat):
@@ -18,7 +19,6 @@ class State:
   
   def is_goal(self):
     return self.mleft==0 and self.cleft==0
-  
 
 def getNextMoves(state):
   moves = []
@@ -38,7 +38,30 @@ def getNextMoves(state):
             moves.append(new_state)
   return moves
 
-def printPath(path):
-  for s in path:
-    print(s.mleft, s.cleft, s.mright, s.cright, s.boat)
+class BFS:
+  def __init__(self, state) -> None:
+    self.state = state
+    self.closed = []
+    self.open = deque()
 
+  def search(self):
+    self.open.append((self.state, []))
+    while self.open:
+      state, path = self.open.popleft()
+      if state.is_goal():
+        return path
+      elif state not in self.closed:
+        self.closed.append(state)
+        for move in getNextMoves(state):
+          self.open.append((move, path+[move]))
+    return None
+
+def main():
+  state = State(3, 3, 0, 0, 1)
+  bfs = BFS(state)
+  path = bfs.search()
+  for state in path:
+    print(state.mleft, state.cleft, state.mright, state.cright, state.boat)
+
+if __name__ == '__main__':
+  main()
