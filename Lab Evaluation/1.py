@@ -16,7 +16,7 @@ class PuzzleNode:
     self.heuristic = self.calHeuristic()
 
   def __lt__(self, other):
-    return self.cost + self.heuristic < other.cost + other.heuristic
+    return self.heuristic < other.heuristic
   
   def calHeuristic(self):
     # Manhattan Distance
