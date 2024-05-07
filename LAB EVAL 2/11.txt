@@ -1,0 +1,21 @@
+In the Smith family, a dispute has arisen over the inheritance of a family estate following the
+SET-A
+passing of the patriarch, George Smith. The potential inheritors are his children: Anne, Bill
+Carol, and David. Use Prolog to model and solve this inheritance dispute based on the following
+rules and facts:
+Rules:
+The rightful heir is someone who was named in George's will, who had a positive
+relationship with George, and who did not contest the will previously
+A testimony provided by someone who had a past conflict over inheritance is considered
+unreliable.
+A person has a positive relationship with George if they were involved in his care during
+his last years or had frequent positive communications
+Facts:
+Anne and Carol were named in George's will
+Bill contested George's previous will.
+David took care of George in his last years.
+Carol had a falling out with George over a prior financial issue
+Anne and Bill provide each other with alibis concerning their positive relationship with
+David is testified against by Carol, who had past conflicts over inheritance
+George.
+Determine who the rightful heir to the family estate is based on the Prolog solution
