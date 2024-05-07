@@ -1,0 +1,13 @@
+Convert to predicate logic:
+
+1)Every child loves Santa.
+
+2)Everyone who loves Santa loves any reindeer.
+
+3)Rudolph is a reindeer and Rudolph has a red nose.
+
+4)Anything which has a red nose is weird or is a clown.
+
+5)No reindeer is a clown.
+
+6)Scrooge does not love anything which is weird.

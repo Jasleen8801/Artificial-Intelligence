@@ -1,0 +1,13 @@
+Consider the facts:
+
+1)The members of the Elm St. Bridge Club are Joe, Sally, Bill, and Ellen.
+
+2)Joe is married to Sally.
+
+3)Bill is Ellen’s brother.
+
+4)The spouse of every married person in the club is also in the club.
+
+5)The last meeting of the club was at Joe’s house.
+
+Convert to predicate logic and prove that “Ellen is not married”.

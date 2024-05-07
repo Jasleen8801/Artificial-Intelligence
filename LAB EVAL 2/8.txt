@@ -1,18 +1,15 @@
-After the passing of their grandmother, Elaine, a debate has ensued among her grandchildren
-Sarah, James, Claire, and Robert over the inheritance of her prized jewelry collection. Use
-Prolog to model and resolve this inheritance dispute based on the following rules and facts:
-Rules:
-The rightful inheritor is someone who is explicitly mentioned in Elame's will and who
-has consistently demonstrated care and affection towards her.
-Testimonies from individuals known to have financial disputes with Elaine are
-A grandchild who has a history of visiting Elaine frequently and helping her with daily
-considered unreliable.
-chores qualifies as demonstrating care,
-Facts:
-Sarah and Robert are mentioned in Elaine's will.
-James had a recent financial dispute with Elaine
-Claire took care of Elaine during her last illness
-Robert frequently visited Elaine and helped with her chores
-James and Claire vouch for each other's affection towards Elaine.
-Use the Prolog program to identify the rightul inheritor of Elaine's jewelry
-Sarah is accused by James of neglecting Elaine.
+Translate the following sentences into predicate logic:
+
+1)John likes all kinds of food.
+
+2)Apples are food.
+
+3)Chicken is food.
+
+4)Anything anyone eats and isn’t killed by is food.
+
+5)Bill eats peanuts and is still alive.
+
+6)Sue eats everything Bill eats.
+
+Prove that John likes peanuts using resolution, backward chaining, and forward chaining. Also, answer “What does Sue eat?” using resolution.
